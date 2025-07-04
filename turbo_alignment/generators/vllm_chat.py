@@ -82,7 +82,7 @@ class VLLMChatGenerator(BaseGenerator[ChatDatasetRecord, ChatInferenceOutput]):
             answers = []
             for a in request_output.outputs:
                 ans_msg = AnswerMessage(
-                    id=str(a.index), content=a.text, sequence_score=a.cumulative_logprob, logprobs=a.logprobs
+                    id=str(a.index), content=a.text, sequence_score=a.cumulative_logprob, logprobs=a.logprobs, finish_reason=a.finish_reason
                 )
                 if self._return_logits:
                     ans_msg.input_token_ids = torch.tensor(request_output.prompt_token_ids).unsqueeze(0)
